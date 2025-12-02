@@ -1,10 +1,4 @@
-[tool.ruff.lint]
-select = [
-    "D",
-    "E",
-    "F",
-    "UP",
-    "B",
-    "SIM",
-    "I",
-]
+[project]
+name = "triangulator"
+version = "0.1.0"
+>>>>>>> a242dfe (Firt Test)
