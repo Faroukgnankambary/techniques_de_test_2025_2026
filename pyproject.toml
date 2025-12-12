@@ -1,4 +1,28 @@
 [project]
 name = "triangulator"
 version = "0.1.0"
->>>>>>> a242dfe (Firt Test)
+description = "Micro-service de triangulation pour le TP de tests"
+requires-python = ">=3.10"
+
+# Aucune dépendance externe non autorisée.
+dependencies = [
+    "flask"
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+
+[tool.ruff]
+select = ["E", "F", "W"]
+exclude = [
+    ".venv",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+show_missing = true
