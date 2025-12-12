@@ -11,9 +11,7 @@ dependencies = [
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tests/unit",
-    "tests/connection",
-    "tests/performance"
+    "tests"
 ]
 
 markers = [
