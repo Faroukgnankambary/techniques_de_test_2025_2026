@@ -10,9 +10,11 @@ dependencies = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = [
-    "tests"
+testpaths = ["tests"]
+markers = [
+    "perf: tests de performance"
 ]
+
 
 [tool.ruff]
 select = ["E", "F", "W"]
@@ -27,7 +29,3 @@ source = ["src"]
 [tool.coverage.report]
 show_missing = true
 
-[tool.pytest.ini_options]
-markers = [
-    "perf: tests de performance"
-]
