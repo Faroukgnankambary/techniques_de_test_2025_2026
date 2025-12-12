@@ -13,7 +13,7 @@ dependencies = [
 testpaths = [
     "tests/unit",
     "tests/integration",
-    "tests/connection"
+    "tests/performance"
 ]
 
 markers = [
