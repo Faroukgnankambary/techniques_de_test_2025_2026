@@ -12,9 +12,10 @@ dependencies = [
 [tool.pytest.ini_options]
 testpaths = [
     "tests/unit",
-    "tests/performance",
-    "tests/integration"
+    "tests/integration",
+    "tests/performance"
 ]
+
 markers = [
     "perf: tests de performance"
 ]
