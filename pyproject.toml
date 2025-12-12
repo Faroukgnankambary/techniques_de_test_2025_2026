@@ -10,10 +10,8 @@ dependencies = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = [
-    "tests"
-]
-
+testpaths = ["tests"]
+python_files = ["test_*.py"]
 markers = [
     "perf: tests de performance"
 ]
