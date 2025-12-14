@@ -1,28 +1,27 @@
-import triangulator.triangles as tri
-from unittest.mock import patch
+from triangulator.triangles import (
+    triangle_area,
+    are_points_collinear,
+    validate_triangle_indices,
+    validate_triangulation,
+)
 
-class TestTriangles:
 
-    def test_validate_triangle_indices_mock(self):
-        with patch("triangulator.triangles.validate_triangle_indices") as mock:
-            mock.return_value = True
-            res = tri.validate_triangle_indices([(0,0)], 0,1,2)
-            assert res is True
+class TestTrianglesReal:
 
-    def test_triangle_area_mock(self):
-        with patch("triangulator.triangles.triangle_area") as mock:
-            mock.return_value = 7.5
-            res = tri.triangle_area((0,0),(1,0),(0,3))
-            assert res == 7.5
+    def test_triangle_area(self):
+        assert triangle_area((0,0), (4,0), (0,3)) == 6.0  # triangle classique
 
-    def test_are_points_collinear_mock(self):
-        with patch("triangulator.triangles.are_points_collinear") as mock:
-            mock.return_value = True
-            res = tri.are_points_collinear((0,0),(1,1),(2,2))
-            assert res is True
+    def test_collinear(self):
+        assert are_points_collinear((0,0), (1,1), (2,2)) is True
+        assert are_points_collinear((0,0), (1,0), (1,1)) is False
 
-    def test_validate_triangulation_mock(self):
-        with patch("triangulator.triangles.validate_triangulation") as mock:
-            mock.return_value = True
-            res = tri.validate_triangulation([], [])
-            assert res is True
+    def test_indices_validation(self):
+        points = [(0,0), (1,0), (0,1)]
+
+        assert validate_triangle_indices(points, 0, 1, 2) is True
+        assert validate_triangle_indices(points, 0, 1, 5) is False
+
+    def test_validate_triangulation(self):
+        pts = [(0,0), (1,0), (0,1)]
+        tris = [(0,1,2)]
+        assert validate_triangulation(pts, tris) is True

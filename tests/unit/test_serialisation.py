@@ -1,29 +1,40 @@
-import triangulator.serialisation as serial
-from unittest.mock import patch
+import pytest
+from triangulator.serialisation import (
+    pointset_to_binary,
+    binary_to_pointset,
+    triangles_to_binary,
+    binary_to_triangles,
+)
 
-class TestSerialisation:
 
-    def test_pointset_to_binary_mock(self):
-        with patch("triangulator.serialisation.pointset_to_binary") as mock:
-            mock.return_value = b"donnees_mockees"
-            res = serial.pointset_to_binary([(0,0)])
-            assert res == b"donnees_mockees"
+class TestSerialisationReal:
 
-    def test_binary_to_pointset_mock(self):
-        with patch("triangulator.serialisation.binary_to_pointset") as mock:
-            mock.return_value = [(1.5, 2.5)]
-            res = serial.binary_to_pointset(b"bin")
-            assert res == [(1.5, 2.5)]
+    def test_pointset_roundtrip(self):
+        points = [(0.0, 1.0), (2.5, -3.75)]
+        data = pointset_to_binary(points)
+        decoded = binary_to_pointset(data)
+        assert decoded == points
 
-    def test_triangles_to_binary_mock(self):
-        with patch("triangulator.serialisation.triangles_to_binary") as mock:
-            mock.return_value = b"T"
-            res = serial.triangles_to_binary([(0,0)], [(0,1,2)])
-            assert res == b"T"
+    def test_empty_pointset(self):
+        points = []
+        data = pointset_to_binary(points)
+        decoded = binary_to_pointset(data)
+        assert decoded == []
 
-    def test_binary_to_triangles_mock(self):
-        with patch("triangulator.serialisation.binary_to_triangles") as mock:
-            mock.return_value = ([(0,0)], [(0,1,2)])
-            pts, tris = serial.binary_to_triangles(b"bin")
-            assert pts == [(0,0)]
-            assert tris == [(0,1,2)]
+    def test_triangles_roundtrip(self):
+        points = [(0, 0), (1, 0), (0, 1)]
+        triangles = [(0, 1, 2)]
+
+        data = triangles_to_binary(points, triangles)
+        pts2, tris2 = binary_to_triangles(data)
+
+        assert pts2 == points
+        assert tris2 == triangles
+
+    def test_invalid_binary_pointset(self):
+        with pytest.raises(Exception):
+            binary_to_pointset(b"\x00\x01")  # Données absurdes
+
+    def test_invalid_binary_triangles(self):
+        with pytest.raises(Exception):
+            binary_to_triangles(b"\x05\x00\x00\x99")

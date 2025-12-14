@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>triangulator.api API documentation</title>
+<meta name="description" content="API Flask du Triangulator.
+Service responsable de récupérer un PointSet auprès du PointSetManager,
+de le trianguler, puis de renvoyer la …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>triangulator.api</code></h1>
+</header>
+<section id="section-intro">
+<p>API Flask du Triangulator.
+Service responsable de récupérer un PointSet auprès du PointSetManager,
+de le trianguler, puis de renvoyer la représentation binaire des triangles.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="triangulator.api.health"><code class="name flex">
+<span>def <span class="ident">health</span></span>(<span>) ‑> flask.wrappers.Response</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/health&#34;, methods=[&#34;GET&#34;])
+def health() -&gt; Response:
+    &#34;&#34;&#34;
+    Endpoint de santé du Triangulator.
+    Doit renvoyer {&#34;status&#34;: &#34;ok&#34;} selon les tests d&#39;intégration.
+    &#34;&#34;&#34;
+    return jsonify({&#34;status&#34;: &#34;ok&#34;}), 200</code></pre>
+</details>
+<div class="desc"><p>Endpoint de santé du Triangulator.
+Doit renvoyer {"status": "ok"} selon les tests d'intégration.</p></div>
+</dd>
+<dt id="triangulator.api.method_not_allowed"><code class="name flex">
+<span>def <span class="ident">method_not_allowed</span></span>(<span>error)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.errorhandler(405)
+def method_not_allowed(error):
+    return jsonify({&#34;error&#34;: &#34;Méthode non autorisée&#34;}), 405</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="triangulator.api.not_found"><code class="name flex">
+<span>def <span class="ident">not_found</span></span>(<span>error)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.errorhandler(404)
+def not_found(error):
+    return jsonify({&#34;error&#34;: &#34;Route inconnue&#34;}), 404</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="triangulator.api.run_server"><code class="name flex">
+<span>def <span class="ident">run_server</span></span>(<span>host: str = '0.0.0.0', port: int = 5000, debug: bool = False)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_server(host: str = &#34;0.0.0.0&#34;, port: int = 5000, debug: bool = False):
+    &#34;&#34;&#34;
+    Lancement du serveur Flask.
+    &#34;&#34;&#34;
+    app.run(host=host, port=port, debug=debug)</code></pre>
+</details>
+<div class="desc"><p>Lancement du serveur Flask.</p></div>
+</dd>
+<dt id="triangulator.api.triangulate"><code class="name flex">
+<span>def <span class="ident">triangulate</span></span>(<span>) ‑> flask.wrappers.Response</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/triangulate&#34;, methods=[&#34;POST&#34;])
+def triangulate() -&gt; Response:
+    &#34;&#34;&#34;
+    Endpoint principal.
+
+    CAS ACCEPTÉS :
+    1. JSON : {&#34;pointset_id&#34;: &#34;...&#34;}
+       → Récupère le pointset auprès du PointSetManager
+
+    2. Corps binaire direct
+       → Interprété comme un PointSet binaire
+
+    Retour :
+    - Binaire des triangles si succès
+    - JSON d&#39;erreur si problème
+    &#34;&#34;&#34;
+
+    # ------------------------------------------------------------------
+    # CAS 1 : JSON avec pointset_id
+    # ------------------------------------------------------------------
+    if request.is_json:
+        payload = request.get_json(silent=True)
+        if not payload or &#34;pointset_id&#34; not in payload:
+            return jsonify({&#34;error&#34;: &#34;JSON invalide, &#39;pointset_id&#39; manquant&#34;}), 400
+
+        pointset_id = payload[&#34;pointset_id&#34;]
+
+        try:
+            data = pointset_client.fetch_pointset(pointset_id)
+        except Exception as e:
+            return jsonify({&#34;error&#34;: str(e)}), 503
+
+        try:
+            points = binary_to_pointset(data)
+        except Exception:
+            return jsonify({&#34;error&#34;: &#34;PointSet invalide&#34;}), 400
+
+    # ------------------------------------------------------------------
+    # CAS 2 : Données binaires envoyées directement
+    # ------------------------------------------------------------------
+    else:
+        data = request.get_data()
+
+        if not data:
+            return jsonify({&#34;error&#34;: &#34;Aucune donnée fournie&#34;}), 400
+
+        try:
+            points = binary_to_pointset(data)
+        except Exception:
+            return jsonify({&#34;error&#34;: &#34;Format binaire non valide&#34;}), 400
+
+    # ------------------------------------------------------------------
+    # TRIANGULATION
+    # ------------------------------------------------------------------
+    try:
+        triangles = simple_triangulation(points)
+    except Exception:
+        return jsonify({&#34;error&#34;: &#34;Échec de la triangulation&#34;}), 500
+
+    # ------------------------------------------------------------------
+    # SÉRIALISATION
+    # ------------------------------------------------------------------
+    try:
+        binary_output = triangles_to_binary(points, triangles)
+    except Exception:
+        return jsonify({&#34;error&#34;: &#34;Échec sérialisation triangles&#34;}), 500
+
+    # Réponse binaire brute
+    return Response(binary_output, status=200, mimetype=&#34;application/octet-stream&#34;)</code></pre>
+</details>
+<div class="desc"><p>Endpoint principal.</p>
+<p>CAS ACCEPTÉS :
+1. JSON : {"pointset_id": "&hellip;"}
+→ Récupère le pointset auprès du PointSetManager</p>
+<ol>
+<li>Corps binaire direct
+→ Interprété comme un PointSet binaire</li>
+</ol>
+<p>Retour :
+- Binaire des triangles si succès
+- JSON d'erreur si problème</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="triangulator.api.PointSetManagerClient"><code class="flex name class">
+<span>class <span class="ident">PointSetManagerClient</span></span>
+<span>(</span><span>base_url: str = 'http://localhost:8000')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PointSetManagerClient:
+    &#34;&#34;&#34;
+    Client minimaliste du PointSetManager.
+    Implémenté UNIQUEMENT avec la bibliothèque standard (urllib)
+    car requests est interdit dans le sujet.
+    &#34;&#34;&#34;
+
+    def __init__(self, base_url: str = &#34;http://localhost:8000&#34;):
+        self.base_url = base_url.rstrip(&#34;/&#34;)
+
+    def fetch_pointset(self, pointset_id: str) -&gt; bytes:
+        &#34;&#34;&#34;
+        Récupère un PointSet en binaire depuis le PointSetManager.
+        &#34;&#34;&#34;
+        url = f&#34;{self.base_url}/pointset/{pointset_id}&#34;
+
+        try:
+            with urllib.request.urlopen(url) as response:
+                return response.read()
+
+        except urllib.error.HTTPError as e:
+            raise RuntimeError(f&#34;Erreur HTTP du PointSetManager : {e.code}&#34;) from e
+
+        except urllib.error.URLError as e:
+            raise RuntimeError(&#34;Impossible de contacter PointSetManager&#34;) from e
+
+    def health_check(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Vérifie si le PointSetManager répond.
+        &#34;&#34;&#34;
+        url = f&#34;{self.base_url}/health&#34;
+
+        try:
+            with urllib.request.urlopen(url) as response:
+                data = response.read()
+                return b&#34;ok&#34; in data.lower()
+        except Exception:
+            return False</code></pre>
+</details>
+<div class="desc"><p>Client minimaliste du PointSetManager.
+Implémenté UNIQUEMENT avec la bibliothèque standard (urllib)
+car requests est interdit dans le sujet.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="triangulator.api.PointSetManagerClient.fetch_pointset"><code class="name flex">
+<span>def <span class="ident">fetch_pointset</span></span>(<span>self, pointset_id: str) ‑> bytes</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fetch_pointset(self, pointset_id: str) -&gt; bytes:
+    &#34;&#34;&#34;
+    Récupère un PointSet en binaire depuis le PointSetManager.
+    &#34;&#34;&#34;
+    url = f&#34;{self.base_url}/pointset/{pointset_id}&#34;
+
+    try:
+        with urllib.request.urlopen(url) as response:
+            return response.read()
+
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f&#34;Erreur HTTP du PointSetManager : {e.code}&#34;) from e
+
+    except urllib.error.URLError as e:
+        raise RuntimeError(&#34;Impossible de contacter PointSetManager&#34;) from e</code></pre>
+</details>
+<div class="desc"><p>Récupère un PointSet en binaire depuis le PointSetManager.</p></div>
+</dd>
+<dt id="triangulator.api.PointSetManagerClient.health_check"><code class="name flex">
+<span>def <span class="ident">health_check</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def health_check(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Vérifie si le PointSetManager répond.
+    &#34;&#34;&#34;
+    url = f&#34;{self.base_url}/health&#34;
+
+    try:
+        with urllib.request.urlopen(url) as response:
+            data = response.read()
+            return b&#34;ok&#34; in data.lower()
+    except Exception:
+        return False</code></pre>
+</details>
+<div class="desc"><p>Vérifie si le PointSetManager répond.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="triangulator" href="index.html">triangulator</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="triangulator.api.health" href="#triangulator.api.health">health</a></code></li>
+<li><code><a title="triangulator.api.method_not_allowed" href="#triangulator.api.method_not_allowed">method_not_allowed</a></code></li>
+<li><code><a title="triangulator.api.not_found" href="#triangulator.api.not_found">not_found</a></code></li>
+<li><code><a title="triangulator.api.run_server" href="#triangulator.api.run_server">run_server</a></code></li>
+<li><code><a title="triangulator.api.triangulate" href="#triangulator.api.triangulate">triangulate</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="triangulator.api.PointSetManagerClient" href="#triangulator.api.PointSetManagerClient">PointSetManagerClient</a></code></h4>
+<ul class="">
+<li><code><a title="triangulator.api.PointSetManagerClient.fetch_pointset" href="#triangulator.api.PointSetManagerClient.fetch_pointset">fetch_pointset</a></code></li>
+<li><code><a title="triangulator.api.PointSetManagerClient.health_check" href="#triangulator.api.PointSetManagerClient.health_check">health_check</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
