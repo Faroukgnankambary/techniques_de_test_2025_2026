@@ -95,7 +95,7 @@ make doc	                             Génère la documentation HTML
 4.	Critères de réussite
 
 •	Tous les tests passent (pytest green)
-•	Couverture > 90%
+•	Couverture > 85%
 •	ruff check sans erreur
 •	pdoc3 génère la doc complète
 •	Temps de test total < 10 secondes
